@@ -1,0 +1,146 @@
+<style type="text/css">
+    .root{
+      display: flex;
+      justify-content: center; 
+ 
+     }
+     .box{
+       width:1000px;
+     
+       background-color: #ecf0f1;
+       border-radius: 20px;
+       margin-top: 30px;
+       padding: 20px;
+    
+     }
+     .gap{
+      margin-top: 10px;
+    
+     }
+    
+    
+   .dashboard{
+     width: 300px;
+     height: 100vh;
+     padding: 10px;;
+     background-color: #f1f2f6;
+     
+   }
+   .dgap{
+    margin-top: 15px;
+    width: 250px;
+   }
+  
+  </style>
+
+
+ <html>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <title>
+      Admin Dashboard
+  </title>
+  <body>
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="/images/product.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      Product Management 
+    </a>
+    <div>
+      <img src="/images/<%=aresult.picture %>" style="border-radius: 15px; width: 30px; height: 30px;" />
+      <%=aresult.adminname %>
+    </div>
+  </nav>
+  <div class="form-row">
+    <div class="form-group col-md-2" style="display: flex; align-items: center; justify-content:left; ">
+    <div class="dashboard">
+      <div><button type="button" class="btn btn-light dgap" style="font-size: 16px;font-weight: bold;">Dashboard</button></div>    
+    <div><a type="button" class="btn btn-light dgap" href="/products/productinterface">Add Product</a></div>  
+    <div><a type="button" class="btn btn-light dgap" href="/products/displayproducts">List Product</a></div>  
+    <div><a type="button" class="btn btn-light dgap" href="/products/searchbyid">Search Product</a></div>  
+    <div><a type="button" class="btn btn-light dgap" href="/admin/logout">Logout</a></div>  
+    
+    
+    </div>    
+    
+    
+    </div>
+
+    <div class="form-group col-md-10" style="display: flex;  justify-content: center; ">
+    
+    
+      <title>
+        Product List
+    </title>
+    <body bgcolor="#ecf0f1">
+        <div class="root">
+            <div class="box">
+              <div class="row">
+                <div style="padding-left: 20px;font-size: 20px;color:coral; font-weight: bolder; letter-spacing: 2px;">
+                  <img src="/images/product.png" width="30">
+                  Product List
+                </div> 
+                <div style="font-size:20; font-weight: bold; display: flex;justify-content: right;align-items: center;width:650">
+                  <a href="/products/productinterface">Add New Product</a>
+                </div>
+  
+             </div>
+             
+             <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Model</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Gst</th>
+                      <th scope="col">Unit</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Offer</th>
+                      <th scope="col">Stock</th>
+                      <th scope="col">Picture</th>
+                      <th scope="col">Update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+<% if(result) { 
+result.map((item)=>{ %>
+
+    <tr>
+      <th scope="row"><%=item.productid %></th>
+
+
+    <td><%=item.productname %></td>
+    <td><%=item.productmodel %></td>
+    <td><%=item.category %></td>
+    <td><%=item.gst %></td>
+    <td><%=item.unitname %><br><%=item.producttypename %></td>
+    <td><%=item.price %> <%=item.currencytype %></td>
+    <td><%=item.offerrate %><br><%=item.offertype %></td>
+    <td><%=item.stock %></td>
+    <td><a href="/products/editpicture?pid=<%=item.productid %>&pname=<%=item.productname %>&picture=<%=item.picture %>"><img src='/images/<%=item.picture %>' width="40"/></a></td>
+    <th><a href="/products/displaybyid?pid=<%=item.productid %>">Edit/Delete</a></th>
+   </tr>
+
+
+<% }) }  else  {%>
+
+<h1><%=msg %></h1>
+<% } %>
+
+                  </tbody>
+                  </table>
+</div>
+</div>
+</body> 
+    
+    </div>
+  </div>
+        </body>
+  </html>
+
+
+
+
+    

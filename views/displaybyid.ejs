@@ -1,0 +1,225 @@
+<style type="text/css">
+  .root{
+    display: flex;
+    justify-content: center; 
+   
+   }
+   .box{
+     width:700px;
+   
+     background-color: #dcdde1;
+     border-radius: 20px;
+     margin-top: 30px;
+     padding: 20px;
+  
+   }
+   .gap{
+    margin-top: 10px;
+  
+   }
+  
+   
+     .dashboard{
+       width: 300px;
+       height: 100vh;
+       padding: 10px;;
+       background-color: #f1f2f6;
+       
+     }
+     .dgap{
+      margin-top: 15px;
+      width: 250px;
+     }
+    
+    </style>
+  
+  
+   <html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>
+        Admin Dashboard
+    </title>
+    <body>
+  
+  <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="/images/product.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Product Management 
+      </a>
+      <div>
+        <img src="/images/<%=aresult.picture %>" style="border-radius: 15px; width: 30px; height: 30px;" />
+        <%=aresult.adminname %>
+      </div>
+    </nav>
+    <div class="form-row">
+      <div class="form-group col-md-2" style="display: flex; align-items: center; justify-content:left; ">
+      <div class="dashboard">
+        <div><button type="button" class="btn btn-light dgap" style="font-size: 16px;font-weight: bold;">Dashboard</button></div>    
+      <div><a type="button" class="btn btn-light dgap" href="/products/productinterface">Add Product</a></div>  
+      <div><a type="button" class="btn btn-light dgap" href="/products/displayproducts">List Product</a></div>  
+      <div><a type="button" class="btn btn-light dgap" href="/products/searchbyid">Search Product</a></div>  
+      <div><a type="button" class="btn btn-light dgap" href="/admin/logout">Logout</a></div>  
+      
+      </div>    
+      
+      
+      </div>
+  
+      <div class="form-group col-md-10" style="display: flex;  justify-content: center; ">
+      
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+        </script>
+        <script src="/javascripts/project.js"></script>
+        <title>
+            Product Interface[Updation]
+        </title>
+        <body bgcolor="#f1f2f6">
+          <form action="/products/updateproduct" method="post">
+            <input type='hidden' value="<%=result.productid %>" name="productid" >
+            <div class="root">
+               <div class="box">
+               <div class="row">
+                  <div style="padding-left: 20px;font-size: 20px;color:coral; font-weight: bolder; letter-spacing: 2px;">
+                    <img src="/images/product.png" width="30">
+                    Product Interface[Updation]
+                  </div> 
+                  <div style="font-size:20; font-weight: bold; display: flex;justify-content: right;align-items: center;width:300">
+                    <a href="/products/displayproducts">Product List</a>
+                  </div>
+    
+               </div>
+               
+                <div class="row gap">
+                    <div class="col">
+                      <input required value="<%=result.productname%>" name="productname" type="text" class="form-control" placeholder="Product Name">
+                    </div>
+                  
+                                     
+                  </div>
+    
+                  <div class="row gap">
+                    <div class="col">
+                      <input value="<%=result.productmodel%>" name="productmodel" type="text" class="form-control" placeholder="Product Model">
+                    </div>
+                     
+                                     
+                  </div>
+    
+    
+                  
+                  <div class="row gap">
+                  
+                    <div class="col" style="display: flex; justify-content: center; align-items: center; ">
+                      <% if(result.category=="Food") {%>
+                      <input checked type="radio"  name="category" id="food" value="Food" style="padding:5px;"> <i style="color:orangered; padding: 5px;font-size:25px; margin-right: 20px;" class="fas fa-utensils"></i> 
+                     <input type="radio" name="category" id="electronics" style="padding: 5px;" value="Electronics"> <i style="color:blueviolet; padding: 5px;font-size:25px; margin-right: 20px;"class="fas fa-laptop"></i>
+                     <%} else if(result.category=="Electronics") {%>
+                      <input type="radio"  name="category" id="food" value="Food" style="padding:5px;"> <i style="color:orangered; padding: 5px;font-size:25px; margin-right: 20px;" class="fas fa-utensils"></i> 
+                      <input  checked type="radio" name="category" id="electronics" style="padding: 5px;" value="Electronics"> <i style="color:blueviolet; padding: 5px;font-size:25px; margin-right: 20px;"class="fas fa-laptop"></i>
+                      <%} %>    
+                     <input type="text" value="<%=result.gst%>" name="gst" id="gst" class="form-control" style="width: 60px;" placeholder="GST">
+                    </div>
+    
+                    <div class="col">
+                      <select class="form-control" id='ptype' name="producttype">
+                        <option value='<%=result.producttypeid %>'><%=result.producttypename%></option>
+                        
+                       </select>
+    
+                    </div>
+                  </div>
+    
+    
+                  <div class="row gap">
+                   
+                    <div class="col">
+                      <select class="form-control" id='unit' name="unit">
+                        <option value='<%=result.unitid %>'><%=result.unitname%></option>
+                       </select>
+                    </div>
+                          
+                    <div class="col" style="display: flex; justify-content: center; align-items: center; ">
+                      <% if(result.currencytype=="inr") {%> 
+                      <input checked type="radio" name="currency" id="inr" value="inr" style="padding:5px;"> <i style="color:darkgreen; padding: 5px;font-size:25px; margin-right: 20px;" class="fas fa-rupee-sign"></i> 
+                      <input type="radio" name="currency" id="usd" style="padding: 5px;" value="usd"> <i style="color:navy; padding: 5px;font-size:25px;" class="fas fa-dollar-sign"></i>
+                      <% } else if(result.currencytype=="usd") {%> 
+                        <input type="radio" name="currency" id="inr" value="inr" style="padding:5px;"> <i style="color:darkgreen; padding: 5px;font-size:25px; margin-right: 20px;" class="fas fa-rupee-sign"></i> 
+                        <input checked type="radio" name="currency" id="usd" style="padding: 5px;" value="usd"> <i style="color:navy; padding: 5px;font-size:25px;" class="fas fa-dollar-sign"></i>
+                       <% } %>
+                      <input value="<%=result.price %>" type="text" id="price" name="price"  class="form-control" style="width: 80px;" placeholder="Price">
+                     </div>       
+                              
+                  </div>
+    
+    
+                  <div class="row gap">
+                    <div class="col">
+                      <input value="<%=result.offerrate%>" name="offerrate" id="offerrate" type="text" class="form-control" placeholder="Offer Rate">
+                    </div>
+                    <div class="col">
+                      <select id="offer" name="offer" class="form-control">
+                        <% if(result.offertype=="5") {%>
+                          <option value="5">Festival Offer</option>
+                         <%} else if(result.offertype=="15") {%>
+                          <option value="15">Exchange Offer</option>  
+                          <%} else if(result.offertype=="2") {%> 
+                            <option value="2">Weekend Offer</option>
+                          <%} %>    
+                        <option>None</option>
+                        <option value="5">Festival Offer</option>
+                        <option value="15">Exchange Offer</option>
+                        <option value="2">Weekend Offer</option>
+                      </select>
+    
+                    </div>
+                                     
+                  </div>
+    
+    
+    
+    
+    
+    
+    
+                  <div class="row gap">
+                    <div class="col">
+                      <input value="<%=result.stock%>"  name="stock" type="text" class="form-control" placeholder="Stock">
+                    </div>
+                    <div class="col">
+                      <img src='/images/<%=result.picture %>' width="25"/>
+                    </div>
+                                     
+                  </div>
+    
+                  <div class="row gap">
+                    <div class="col" style="display: flex; justify-content: center; align-items: center; ">
+                      <button type="Submit" name="btn"  value="Edit" style="width:200px" class="btn btn-primary">Edit</button>
+                    </div>
+                    <div class="col" style="display: flex; justify-content: center; align-items: center; ">
+                      <button type="submit" name="btn" value="Delete" style="width:200px" class="btn btn-primary">Delete</button>
+                    </div>
+                                     
+                  </div>
+    
+    
+                  <div class="row gap">
+                    <div class="col" style="display: flex; justify-content: center; align-items: center; ">
+                    <h3></h3>
+                    </div>
+                  </div>
+    
+    
+               </div>
+             
+    
+    
+            </div>
+    </form>
+    
+        </body>
+      
+      </div>
+    </div>
+          </body>
+    </html>  
